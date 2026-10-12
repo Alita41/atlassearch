@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+build/
+*.pyc
+.env
+*.index
+*.bin
+*.pt
+*.onnx
+data/faiss*

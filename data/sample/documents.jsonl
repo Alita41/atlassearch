@@ -1,0 +1,5 @@
+{"id":1,"title":"Machine Learning Search Systems","text":"A hybrid search engine can combine lexical BM25 ranking with dense semantic retrieval for better recall.","source":"sample","language":"english"}
+{"id":2,"title":"Sindh Higher Education Policy","text":"This sample passage discusses undergraduate admission requirements, credit hours, and quality standards in Sindh universities.","source":"sample","language":"english"}
+{"id":3,"title":"Roman Urdu Search","text":"Agar user Roman Urdu men query likhe to search engine ko spelling variation aur code switching handle karna chahiye.","source":"sample","language":"roman_urdu"}
+{"id":4,"title":"اردو سرچ مثال","text":"یہ ایک نمونہ دستاویز ہے جو اردو میں سرچ اور معلومات کی بازیافت کے بارے میں ہے۔","source":"sample","language":"urdu_script"}
+{"id":5,"title":"Distributed Retrieval Architecture","text":"The API uses a persistent native C++ search process, PostgreSQL-ready metadata design, Redis-ready caching, and Docker deployment.","source":"sample","language":"english"}

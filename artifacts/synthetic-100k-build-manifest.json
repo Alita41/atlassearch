@@ -1,0 +1,9 @@
+{
+  "source": "data/synthetic-100k.jsonl",
+  "output": "data/synthetic-100k.normalized.tsv",
+  "documents": 100000,
+  "workers": 4,
+  "sha256": "7c2d45e403f0148fafe28c8a0a661049d142c940e8e14fa43ea3c9ea959ab4ff",
+  "build_seconds": 2.157929,
+  "documents_per_second": 46340.72
+}

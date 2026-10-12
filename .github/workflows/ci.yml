@@ -1,0 +1,25 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python test dependencies
+        run: pip install pytest numpy
+      - name: Build C++ core
+        run: |
+          cmake -S cpp -B build/cpp -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/cpp -j2
+      - name: Build sample corpus
+        run: PYTHONPATH=. python scripts/build_sample_corpus.py
+      - name: Test
+        run: |
+          ctest --test-dir build/cpp --output-on-failure
+          PYTHONPATH=. pytest -q tests/unit tests/integration
