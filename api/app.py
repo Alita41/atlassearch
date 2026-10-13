@@ -63,18 +63,30 @@ def health():
 @app.get("/v1/autocomplete")
 def autocomplete():
     q = request.args.get("q", "")
-    limit = min(max(int(request.args.get("limit", 8)), 1), 20)
+    try:
+        limit = int(request.args.get("limit", 8))
+    except (TypeError, ValueError):
+        return jsonify({"error": "limit must be an integer"}), 400
+    limit = min(max(limit, 1), 20)
     return jsonify({"query": q, "suggestions": BM25.autocomplete(q, limit)})
 
 
 @app.post("/v1/search")
 def search():
-    body = request.get_json(force=True, silent=False)
+    body = request.get_json(silent=True)
+    if not isinstance(body, dict):
+        return jsonify({"error": "request body must be a JSON object"}), 400
     q = str(body.get("query", "")).strip()
     if not q:
         return jsonify({"error": "query is required"}), 400
-    top_k = min(max(int(body.get("top_k", 10)), 1), 50)
+    try:
+        top_k = int(body.get("top_k", 10))
+    except (TypeError, ValueError):
+        return jsonify({"error": "top_k must be an integer"}), 400
+    top_k = min(max(top_k, 1), 50)
     mode = body.get("mode", "bm25")
+    if mode not in {"bm25", "dense", "hybrid"}:
+        return jsonify({"error": "mode must be bm25, dense, or hybrid"}), 400
     started = perf_counter()
     cached = CACHE.get(mode, q, top_k)
     if cached is not None:
